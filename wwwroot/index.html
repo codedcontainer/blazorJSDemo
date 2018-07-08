@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>BlazerJSDemo</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <app>Loading...</app>
+
+    <script type="blazor-boot"></script>
+    <script>
+        Blazor.registerFunction('JSMethod', function () {
+            $("#demop").text("JavaScript Method invoked");
+        });
+    </script>
+    <script>
+        Blazor.registerFunction('CSMethod', function(){
+            Blazor.invokeDotNetMethod({
+                type: {
+                    assembly: 'blazerJSDemo', 
+                    name: 'BlazerJSDemo.Pages.JSDemoModel'
+                },
+                method: {
+                    name: 'CSCallBackMethod'
+                }
+            })
+        })
+    </script>
+</body>
+</html>
